@@ -71,17 +71,17 @@ public class FirstController:ControllerBase
 
     }
 
-  //    public ActionResult<List<Student>> Post(string name) {
-//         var spost = Students();
-//         if(name == "" || name == null)
-//         return BadRequest("student Name Required");
-//         var student = new Student{
-//             Id = 5,
-//             Name = name
-//         };
-//         spost.Add(student);
-//         return spost;
+     public ActionResult<List<Student>> Post(string name) {
+        var spost = Students();
+        if(name == "" || name == null)
+        return BadRequest("student Name Required");
+        var student = new Student{
+            Id = 5,
+            Name = name
+        };
+        spost.Add(student);
+        return spost;
 
-//     }
+    }
 
 }
