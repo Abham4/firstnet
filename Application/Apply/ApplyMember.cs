@@ -2,45 +2,42 @@ namespace firstnet.Application.Apply;
 
 using firstnet.Application.Interface;
 using firstnet.Data;
+using firstnet.Infrastracture.Interface;
 using firstnet.Model;
 public class ApplyMember:IMember {
-    private readonly Context context;
-    public ApplyMember (Context con) {
+    private readonly IMemberRepositery context;
+    public ApplyMember (IMemberRepositery con) {
         context = con;
     }
       
-    public List<Member> Get(){
+    public IReadOnlyList<Member> Get(){
 
-        var mem = context.Members.ToList();
+        var mem = context.GetAll();
         return mem;
     }
 
     public Member GetById(int id){
-        var mem = context.Members.SingleOrDefault(m => m.Id == id);
+        var mem = context.GetById(id);
         return mem;
     }
 
     public string MemberDelete(int id) {
-        var mem = context.Members.SingleOrDefault(m => m.Id == id);
-        context.Members.Remove(mem);
-        context.SaveChanges();
-        return "deleted";
+        var member = GetById(id);
+        var mem = context.Delete(member);
+        return mem;
     }
     public  string MemberEdit(Member member){
-        var mem = context.Members.SingleOrDefault(m => m.Id == member.Id);
+        var memEdit = GetById(member.Id);
+        var mem = context.Edit(memEdit);
         mem.FirstName = member.FirstName;
         mem.MiddleName = member.MiddleName;
         mem.LastName = member.LastName;
         mem.Gender = member.Gender;
         mem.Age = member.Age;
-        context.Members.Update(mem);
-        context.SaveChanges();
-        return  "Updated";       
+        return  "Updated";     
     }
     public string MemberPost(Member member){
-   
         context.Add(member);
-        context.SaveChanges();
         return "add new member";
     }
 

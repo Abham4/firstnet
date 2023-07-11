@@ -1,6 +1,9 @@
 using firstnet.Application.Interface;
 using firstnet.Application.Apply;
 using Microsoft.EntityFrameworkCore;
+using firstnet.Infrastracture.Interface;
+using firstnet.Infrastracture.Apply;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -13,6 +16,8 @@ var mysql = builder.Configuration.GetConnectionString("JoshuaBackEnd");
 builder.Services.AddDbContext<firstnet.Data.Context>(c  => {
     c.UseMySql(mysql,ServerVersion.AutoDetect(mysql));
 });
+builder.Services.AddScoped(typeof(IBaseRepositery<>),typeof(BaseRepositery<>));
+builder.Services.AddScoped<IMemberRepositery,MemberRepositery>();
 builder.Services.AddScoped<IMember,ApplyMember>();
 var app = builder.Build();
 

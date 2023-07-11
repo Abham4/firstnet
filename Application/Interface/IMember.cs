@@ -1,7 +1,7 @@
 namespace firstnet.Application.Interface;
 using firstnet.Model;
 public interface IMember {
-    List<Member> Get();
+    IReadOnlyList<Member> Get();
     Member GetById(int id);
     string MemberDelete(int id);
 
