@@ -1,11 +1,11 @@
 namespace firstnet.Application.Interface;
-
+using firstnet.Model;
 public interface IMember {
     List<Member> Get();
     Member GetById(int id);
-    List<Member> MemberDelete(int id);
+    string MemberDelete(int id);
 
-    List<Member> MemberEdit(Member member);
-    List<Member> MemberPost(Member member);
+    string MemberEdit(Member member);
+    string MemberPost(Member member);
 
 }

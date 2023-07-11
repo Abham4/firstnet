@@ -1,7 +1,7 @@
 using firstnet.Application.Interface;
 using Microsoft.AspNetCore.Mvc;
 
-namespace firstnet;
+namespace firstnet.Model;
 [ApiController]
 [Route("Member")]
 public class MemberController:ControllerBase {
@@ -11,19 +11,27 @@ public class MemberController:ControllerBase {
   }
  [HttpGet]
  public ActionResult<List<Member>> Get(){
-  return members.Get();
+  return Ok(members.Get());
  } 
  
 
 
 [HttpGet("{id}")]
 public ActionResult<Member> GetById(int id) {
-    var 
+   return members.GetById(id);
 }
 
 [HttpDelete("{id}")]
 
-public List<Member> MemberDelete(int id) {
+public ActionResult<List<Member>> MemberDelete(int id) {
+   return Ok(members.MemberDelete(id));
 }
-
+[HttpPut]
+public ActionResult<List<Member>> MemberEdit(Member member) {
+   return Ok(members.MemberEdit(member));
+}
+[HttpPost]
+public ActionResult<List<Member>> MemberPost(Member member) {
+   return Ok(members.MemberPost(member));
+}
 }

@@ -1,62 +1,47 @@
 namespace firstnet.Application.Apply;
 
 using firstnet.Application.Interface;
-
+using firstnet.Data;
+using firstnet.Model;
 public class ApplyMember:IMember {
-       public List<Member> MemberList() {
-        return new List<Member> {
-            new Member {
-                Id= 1,
-                FirstName = "Kassa",
-                MiddleName = "Kassaye",
-                LastName = "Kassu",
-                Gender = "Male",
-                Age = 20
-                 },
-                  new Member {
-                Id= 2,
-                FirstName = "abebe",
-                MiddleName = "kebede",
-                LastName = "Kassu",
-                Gender = "Male",
-                Age = 20
-                 },
-        };
+    private readonly Context context;
+    public ApplyMember (Context con) {
+        context = con;
     }
+      
     public List<Member> Get(){
 
-        var mem = MemberList();
+        var mem = context.Members.ToList();
         return mem;
     }
 
     public Member GetById(int id){
-        var mem = MemberList().SingleOrDefault(m => m.Id == id);
+        var mem = context.Members.SingleOrDefault(m => m.Id == id);
         return mem;
     }
 
-    public List<Member> MemberDelete(int id) {
-        var mem = MemberList();
-        var memDel = mem.SingleOrDefault(m => m.Id == id);
-        mem.Remove(memDel);
-        return mem;
+    public string MemberDelete(int id) {
+        var mem = context.Members.SingleOrDefault(m => m.Id == id);
+        context.Members.Remove(mem);
+        context.SaveChanges();
+        return "deleted";
     }
-    public  List<Member> MemberEdit(Member member){
-        var mem = MemberList();
-        var memEdit = mem.SingleOrDefault(m => m.Id == member.Id);
-        memEdit.FirstName = member.FirstName;
-        memEdit.MiddleName = member.MiddleName;
-        memEdit.LastName = member.LastName;
-        memEdit.Gender = member.Gender;
-        memEdit.Age = member.Age;
-        return mem;
-        
-         
-
+    public  string MemberEdit(Member member){
+        var mem = context.Members.SingleOrDefault(m => m.Id == member.Id);
+        mem.FirstName = member.FirstName;
+        mem.MiddleName = member.MiddleName;
+        mem.LastName = member.LastName;
+        mem.Gender = member.Gender;
+        mem.Age = member.Age;
+        context.Members.Update(mem);
+        context.SaveChanges();
+        return  "Updated";       
     }
-    public List<Member> MemberPost(Member member){
-         var mem = MemberList();
-        mem.Add(member);
-        return mem;
+    public string MemberPost(Member member){
+   
+        context.Add(member);
+        context.SaveChanges();
+        return "add new member";
     }
 
 }

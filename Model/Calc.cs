@@ -1,4 +1,4 @@
-namespace firstnet;
+namespace firstnet.Model;
 
 public class Calc 
 {

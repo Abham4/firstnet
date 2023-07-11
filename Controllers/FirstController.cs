@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace firstnet;
+namespace firstnet.Model;
 
 [ApiController]
 [Route("[controller]")]
