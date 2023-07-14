@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using firstnet.Data;
 
@@ -10,9 +11,11 @@ using firstnet.Data;
 namespace firstnet.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20230712125210_stud")]
+    partial class stud
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,41 +52,6 @@ namespace firstnet.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Members");
-                });
-
-            modelBuilder.Entity("firstnet.Model.Staff", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("LastModifiedDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("MiddleName")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("RegistrationDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Staffs");
                 });
 
             modelBuilder.Entity("firstnet.Model.Stud", b =>

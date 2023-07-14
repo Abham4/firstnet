@@ -19,6 +19,10 @@ builder.Services.AddDbContext<firstnet.Data.Context>(c  => {
 builder.Services.AddScoped(typeof(IBaseRepositery<>),typeof(BaseRepositery<>));
 builder.Services.AddScoped<IMemberRepositery,MemberRepositery>();
 builder.Services.AddScoped<IMember,ApplyMember>();
+builder.Services.AddScoped<IStudRepositery,StudRepositery>();
+builder.Services.AddScoped<IStud,ApplyStud>();
+builder.Services.AddScoped<IStaffRepositery,StaffRepositery>();
+builder.Services.AddScoped<IStaff,ApplyStaff>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,7 +31,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

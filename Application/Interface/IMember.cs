@@ -5,7 +5,7 @@ public interface IMember {
     Member GetById(int id);
     string MemberDelete(int id);
 
-    string MemberEdit(Member member);
+    Member MemberEdit(Member member);
     string MemberPost(Member member);
 
 }

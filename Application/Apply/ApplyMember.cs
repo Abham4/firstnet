@@ -26,15 +26,15 @@ public class ApplyMember:IMember {
         var mem = context.Delete(member);
         return mem;
     }
-    public  string MemberEdit(Member member){
+    public  Member MemberEdit(Member member){
         var memEdit = GetById(member.Id);
         var mem = context.Edit(memEdit);
-        mem.FirstName = member.FirstName;
-        mem.MiddleName = member.MiddleName;
-        mem.LastName = member.LastName;
-        mem.Gender = member.Gender;
-        mem.Age = member.Age;
-        return  "Updated";     
+        memEdit.FirstName = member.FirstName;
+        memEdit.MiddleName = member.MiddleName;
+        memEdit.LastName = member.LastName;
+        memEdit.Gender = member.Gender;
+        memEdit.Age = member.Age;
+        return  mem;     
     }
     public string MemberPost(Member member){
         context.Add(member);
