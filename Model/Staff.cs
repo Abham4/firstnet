@@ -6,4 +6,6 @@ public class Staff:BaseModel {
     public string Gender { get; set; }
     public DateTime BirthDate { get; set; }
     public DateTime RegistrationDate { get; set; }
+    public Member Member { get; set;}
+    public int MemberId { get; set; }
 }

@@ -23,6 +23,8 @@ builder.Services.AddScoped<IStudRepositery,StudRepositery>();
 builder.Services.AddScoped<IStud,ApplyStud>();
 builder.Services.AddScoped<IStaffRepositery,StaffRepositery>();
 builder.Services.AddScoped<IStaff,ApplyStaff>();
+builder.Services.AddScoped<IUserRepositery,UserRepositery>();
+builder.Services.AddScoped<IUser,ApplyUser>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

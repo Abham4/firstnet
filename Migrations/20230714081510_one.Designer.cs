@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using firstnet.Data;
 
@@ -10,9 +11,11 @@ using firstnet.Data;
 namespace firstnet.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20230714081510_one")]
+    partial class one
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,9 +78,6 @@ namespace firstnet.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("MemberId")
-                        .HasColumnType("int");
-
                     b.Property<string>("MiddleName")
                         .HasColumnType("longtext");
 
@@ -85,8 +85,6 @@ namespace firstnet.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MemberId");
 
                     b.ToTable("Staffs");
                 });
@@ -109,10 +107,15 @@ namespace firstnet.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("longtext");
 
+                    b.Property<int>("MemberId")
+                        .HasColumnType("int");
+
                     b.Property<string>("MiddleName")
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MemberId");
 
                     b.ToTable("Studs");
                 });
@@ -151,10 +154,10 @@ namespace firstnet.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("firstnet.Model.Staff", b =>
+            modelBuilder.Entity("firstnet.Model.Stud", b =>
                 {
                     b.HasOne("firstnet.Model.Member", "Member")
-                        .WithMany("Staff")
+                        .WithMany()
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -171,11 +174,6 @@ namespace firstnet.Migrations
                         .IsRequired();
 
                     b.Navigation("Stud");
-                });
-
-            modelBuilder.Entity("firstnet.Model.Member", b =>
-                {
-                    b.Navigation("Staff");
                 });
 
             modelBuilder.Entity("firstnet.Model.Stud", b =>
