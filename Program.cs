@@ -16,6 +16,9 @@ var mysql = builder.Configuration.GetConnectionString("JoshuaBackEnd");
 builder.Services.AddDbContext<firstnet.Data.Context>(c  => {
     c.UseMySql(mysql,ServerVersion.AutoDetect(mysql));
 });
+builder.Services.AddMvc().AddNewtonsoftJson(c => {
+    c.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+});
 builder.Services.AddScoped(typeof(IBaseRepositery<>),typeof(BaseRepositery<>));
 builder.Services.AddScoped<IMemberRepositery,MemberRepositery>();
 builder.Services.AddScoped<IMember,ApplyMember>();
@@ -25,6 +28,10 @@ builder.Services.AddScoped<IStaffRepositery,StaffRepositery>();
 builder.Services.AddScoped<IStaff,ApplyStaff>();
 builder.Services.AddScoped<IUserRepositery,UserRepositery>();
 builder.Services.AddScoped<IUser,ApplyUser>();
+builder.Services.AddScoped<IOrganizationRepositery,OrganizationRepositery>();
+builder.Services.AddScoped<IOrganization,ApplyOrganization>();
+builder.Services.AddScoped<IChecRepositery,CheckRepositery>();
+builder.Services.AddScoped<ICheck,ApplyCheck>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

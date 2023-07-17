@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using firstnet.Data;
 
@@ -10,9 +11,11 @@ using firstnet.Data;
 namespace firstnet.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20230715123240_check")]
+    partial class check
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,33 +46,6 @@ namespace firstnet.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Checks");
-                });
-
-            modelBuilder.Entity("firstnet.Model.CheckOrganizaion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("CheckId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("LastModifiedDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("OrganizationId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CheckId");
-
-                    b.HasIndex("OrganizationId");
-
-                    b.ToTable("CheckOrganizaions");
                 });
 
             modelBuilder.Entity("firstnet.Model.Member", b =>
@@ -227,25 +203,6 @@ namespace firstnet.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("firstnet.Model.CheckOrganizaion", b =>
-                {
-                    b.HasOne("firstnet.Model.Check", "Check")
-                        .WithMany("CheckOrganizaion")
-                        .HasForeignKey("CheckId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("firstnet.Model.Organization", "Organization")
-                        .WithMany("CheckOrganizaion")
-                        .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Check");
-
-                    b.Navigation("Organization");
-                });
-
             modelBuilder.Entity("firstnet.Model.Staff", b =>
                 {
                     b.HasOne("firstnet.Model.Member", "Member")
@@ -268,19 +225,9 @@ namespace firstnet.Migrations
                     b.Navigation("Stud");
                 });
 
-            modelBuilder.Entity("firstnet.Model.Check", b =>
-                {
-                    b.Navigation("CheckOrganizaion");
-                });
-
             modelBuilder.Entity("firstnet.Model.Member", b =>
                 {
                     b.Navigation("Staff");
-                });
-
-            modelBuilder.Entity("firstnet.Model.Organization", b =>
-                {
-                    b.Navigation("CheckOrganizaion");
                 });
 
             modelBuilder.Entity("firstnet.Model.Stud", b =>

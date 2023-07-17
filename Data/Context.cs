@@ -15,6 +15,9 @@ public class Context:DbContext {
 
     public DbSet<Staff>Staffs { get; set; }
     public DbSet<User>Users { get; set;}
+     public DbSet<Check>Checks { get; set; }
+    public DbSet<Organization>Organizations { get; set;}
+    public DbSet<CheckOrganizaion>CheckOrganizaions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

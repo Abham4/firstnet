@@ -31,7 +31,7 @@ public class BaseRepositery<T> : IBaseRepositery<T> where T : BaseModel
       return t;
     }
 
-    public IReadOnlyList<T> GetAll()
+    public virtual IReadOnlyList<T> GetAll()
     {
      return context.Set<T>().ToList();
        
